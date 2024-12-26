@@ -18,6 +18,6 @@ body,
   height: 100%;
   width: 100%;
   @apply text-base;
-  @apply bg-gray-500;
-  @apply text-slate-950;
+  @apply bg-white;
+  @apply dark:bg-black;
 }

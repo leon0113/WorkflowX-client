@@ -12,7 +12,7 @@ const Navbar: FC = () => {
     const isDarkMode = useAppSelector((state: any) => state.global.isDarkMode);
 
     return (
-        <div className='flex items-center justify-between bg-white px-4 py-3 dark:bg-dark-bg'>
+        <div className='flex items-center justify-between bg-white px-10 py-3 dark:bg-dark-bg'>
             {/* //!Left part  */}
             <div className='flex items-center gap-8'>
                 {
