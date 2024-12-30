@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react'
 import ProjectHeader from './ProjectHeader'
-import BoardView from './BoardView'
+import BoardView from '../BoardView'
+import List from '../ListView'
+import TimelineView from '../TimelineView'
 
 type Props = {
     params: {
@@ -23,6 +25,16 @@ const Project = ({ params }: Props) => {
             {
                 activeTab === "Board" && (
                     <BoardView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+                )
+            }
+            {
+                activeTab === "List" && (
+                    <List id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+                )
+            }
+            {
+                activeTab === "Timeline" && (
+                    <TimelineView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
                 )
             }
         </div>
