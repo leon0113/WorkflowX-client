@@ -90,11 +90,11 @@ const Task = ({ task }: TaskProps) => {
                 <div className='mt-3 flex items-center justify-between'>
                     <div className="flex -space-x-[6px] overflow-hidden">
                         {
-                            task.assginee && (
+                            task.assignee && (
                                 <Image
-                                    key={task.assginee.userId}
-                                    src={`/${task.assginee.profilePictureUrl!}`} //! Error
-                                    alt={task.assginee.username}
+                                    key={task.assignee.userId}
+                                    src={`/${task.assignee.profilePictureUrl!}`} //! Error
+                                    alt={task.assignee.username}
                                     width={30}
                                     height={30}
                                     className='h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary'

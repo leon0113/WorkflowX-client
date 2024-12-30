@@ -89,7 +89,7 @@ export interface Task {
     assignedUserId?: number;
 
     author?: User;
-    assginee?: User;
+    assignee?: User;
     comments?: Comment[];
     attachments?: Attachment[];
 }
