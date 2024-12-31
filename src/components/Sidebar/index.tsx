@@ -82,7 +82,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className={clsx(`fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 z-40 bg-white dark:bg-black overflow-y-auto`, isSidebarCollapsed ? 'w-0 hidden' : 'w-64 md:w-72')}>
+    <div className={clsx(`fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 z-40 bg-white dark:bg-black overflow-y-auto`, isSidebarCollapsed ? 'w-0 hidden' : 'w-64 md:w-64')}>
       <div className="flex h-[100%] w-full flex-col justify-start">
         {/* //? logo n closing btn */}
         <div className="flex items-center justify-between z-50 min-h-[56px] w-64 bg-white p-3 dark:bg-black">

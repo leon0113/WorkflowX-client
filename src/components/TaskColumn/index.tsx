@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { EllipsisVertical, Plus } from "lucide-react";
 import { useDrop } from "react-dnd";
-import { Task as TaskType } from '@/types';
+import { Status, Task as TaskType } from '@/types';
 import Task from "../Task";
 
 type TaskColumnProps = {
@@ -9,9 +9,10 @@ type TaskColumnProps = {
     tasks: TaskType[],
     moveTask: (taskId: number, toStatus: string) => void;
     setIsModalNewTaskOpen: (isOpen: boolean) => void;
+    setGivenStatus: (status: string) => void;
 }
 
-const TaskColumn = ({ status, tasks, moveTask, setIsModalNewTaskOpen }: TaskColumnProps) => {
+const TaskColumn = ({ status, tasks, moveTask, setIsModalNewTaskOpen, setGivenStatus }: TaskColumnProps) => {
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "task",
@@ -34,7 +35,7 @@ const TaskColumn = ({ status, tasks, moveTask, setIsModalNewTaskOpen }: TaskColu
             ref={(instance) => {
                 drop(instance)
             }}
-            className={clsx("sm:py-4 py-2 xl:px-2 rounded-lg", isOver ? "bg-blue-200 dark:bg-neutral-950" : "")}
+            className={clsx("sm:py-2 py-1  rounded-lg", isOver ? "bg-blue-200 dark:bg-neutral-950" : "")}
         >
             <div className='mb-3 flex w-full'>
                 <div
@@ -52,7 +53,7 @@ const TaskColumn = ({ status, tasks, moveTask, setIsModalNewTaskOpen }: TaskColu
                         </button>
                         <button
                             className='flex size-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white'
-                            onClick={() => { setIsModalNewTaskOpen(true) }}
+                            onClick={() => { setIsModalNewTaskOpen(true), setGivenStatus(status) }}
                         >
                             <Plus size={16} />
                         </button>
@@ -61,7 +62,7 @@ const TaskColumn = ({ status, tasks, moveTask, setIsModalNewTaskOpen }: TaskColu
             </div>
 
             {
-                tasks.filter((task) => task.status === status).map((task) => (
+                tasks.filter((task) => task.status === status).map((task, index) => (
                     <Task
                         key={task.id}
                         task={task}

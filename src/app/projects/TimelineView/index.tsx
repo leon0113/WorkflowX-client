@@ -48,7 +48,7 @@ const TimelineView = ({ id, setIsModalNewTaskOpen }: Props) => {
     if (error) return <div>Sorry, An Error occurred.</div>
 
     return (
-        <div className='ml-0 md:ml-10  px-4 xl:px-6 overflow-x-scroll'>
+        <div className='px-5 lg:px-10 overflow-x-scroll'>
             <div className="flex flex-wrap items-center justify-between gap-2 py-5 overflow-x-scroll">
                 <h1 className='me-2 text-lg font-bold dark:text-white'>
                     Project Tasks Timeline

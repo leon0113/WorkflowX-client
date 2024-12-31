@@ -83,7 +83,7 @@ const Task = ({ task }: TaskProps) => {
                     {formattedStartDate && <span>{formattedStartDate} - </span>}
                     {formattedDueDate && <span>{formattedDueDate}</span>}
                 </div>
-                <p className='text-sm text-gray-600 dark:text-neutral-500'>{task.description}</p>
+                <p className='text-sm text-gray-600 dark:text-neutral-100 pt-3'>{task.description}</p>
 
                 <div className='mt-4 border-t border-gray-200 dark:border-stroke-dark' />
 

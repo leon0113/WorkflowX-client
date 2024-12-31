@@ -1,8 +1,11 @@
 import Header from '@/components/Header';
-import { Clock, Filter, Grid3X3, List, Search, Share2, Table } from 'lucide-react';
+import { Clock, Filter, Grid3X3, List, PlusSquare, Search, Share2, Table } from 'lucide-react';
 import React, { useState } from 'react';
+import ModalNewProject from '../ModalNewProject';
+import { useGetSingleProjectQuery, useGetTasksQuery } from '@/state/api';
 
 type Props = {
+    id: string;
     activeTab: string;
     setActiveTab: (tabName: string) => void;
 }
@@ -26,14 +29,28 @@ const tabBtnContent = [
     },
 ]
 
-const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
+const ProjectHeader = ({ id, activeTab, setActiveTab }: Props) => {
+    const { data, isLoading, error } = useGetSingleProjectQuery({ projectId: Number(id) });
     const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false);
 
     return (
         <div className='px-5 lg:px-10'>
-            {/* //TODO: Modal for New Project  */}
+            {/*  Modal for New Project  */}
+            <ModalNewProject
+                isOpen={isModalNewProjectOpen}
+                onClose={() => setIsModalNewProjectOpen(false)}
+            />
+
+
             <div className='py-6 lg:pb-4 lg:pt-8'>
-                <Header name='Project Design Development' />
+                <Header name={data?.name!} buttonComponent={
+                    <button
+                        className='flex items-center rounded-md bg-blue-primary px-3 py-2 text-white hover:bg-blue-600'
+                        onClick={() => setIsModalNewProjectOpen(true)}
+                    >
+                        <PlusSquare className='mr-2 size-5' /> New Board
+                    </button>
+                } />
             </div>
 
             {/* Project tabs  */}
@@ -41,7 +58,7 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
                 <div className="flex flex-1 items-center gap-2 md:gap-4">
                     {
                         tabBtnContent.map((tab, index) => (
-                            <TabButton key={index} name={tab.name} icon={tab.icon} activeTab={activeTab} setActiveTab={setActiveTab} />
+                            <TabButton key={tab.name} name={tab.name} icon={tab.icon} activeTab={activeTab} setActiveTab={setActiveTab} />
                         ))
                     }
                 </div>
