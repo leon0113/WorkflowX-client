@@ -76,8 +76,8 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector((state: any) => state.global.isSidebarCollapsed);
 
-  const [showProjects, setShowProjects] = useState(true);
-  const [showPriority, setShowPriority] = useState(true);
+  const [showProjects, setShowProjects] = useState(false);
+  const [showPriority, setShowPriority] = useState(false);
 
 
 
@@ -121,8 +121,8 @@ const Sidebar = () => {
           {/* show Project btn  */}
           <button
             onClick={() => setShowProjects(!showProjects)}
-            className="flex w-full items-center justify-between px-8 py-3 text-gray-500 dark:text-white">
-            <span className={clsx('', showProjects && 'text-gray-900 dark:text-gray-300')}>Projects</span>
+            className="flex w-full items-center justify-between px-8 py-3 text-gray-900 dark:text-white">
+            <span className={clsx('', showProjects && 'text-gray-500 dark:text-gray-300')}>Projects</span>
             {showProjects ? <ChevronUp className="size-5" /> : <ChevronDown className="size-5" />}
           </button>
           {/* project list if btn is clicked  */}
@@ -139,8 +139,8 @@ const Sidebar = () => {
           {/* show Priority btn  */}
           <button
             onClick={() => setShowPriority(!showPriority)}
-            className="flex w-full items-center justify-between px-8 py-3 text-gray-500 dark:text-white">
-            <span className={clsx('', showPriority && 'text-gray-900 dark:text-gray-300')}>Priorities</span>
+            className="flex w-full items-center justify-between px-8 py-3 text-gray-900 dark:text-white">
+            <span className={clsx('', showPriority && 'text-gray-500 dark:text-gray-300')}>Priorities</span>
             {showPriority ? <ChevronUp className="size-5" /> : <ChevronDown className="size-5" />}
           </button>
           {/* Priority list if btn is clicked  */}
