@@ -31,6 +31,9 @@ const TaskCard = ({ task }: Props) => {
                 <strong>ID:</strong> {task.id}
             </p>
             <p>
+                <strong>Project Id:</strong> {task.projectId}
+            </p>
+            <p>
                 <strong>Title:</strong> {task.title}
             </p>
             <p>

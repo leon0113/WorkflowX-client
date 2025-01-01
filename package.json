@@ -19,6 +19,7 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.7",
     "gantt-task-react": "^0.3.9",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.424.0",
     "next": "^14.2.21",
     "numeral": "^2.0.6",
@@ -31,6 +32,7 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "@types/next": "^9.0.0",
     "@types/node": "^20.14.14",
     "@types/numeral": "^2.0.5",

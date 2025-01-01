@@ -93,3 +93,9 @@ export interface Task {
     comments?: Comment[];
     attachments?: Attachment[];
 }
+
+export interface SearchResults {
+    projects: Project[];
+    tasks: Task[];
+    users: User[];
+}
