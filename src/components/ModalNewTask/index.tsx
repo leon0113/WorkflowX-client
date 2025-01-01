@@ -9,10 +9,10 @@ type Props = {
     onClose: () => void;
     id?: string | null;
     givenStatus?: string
-    setGivenStatus: (status: string) => void;
+    setGivenStatus?: (status: string) => void;
 };
 
-const ModalNewTask = ({ isOpen, onClose, id, givenStatus, setGivenStatus }: Props) => {
+const ModalNewTask = ({ isOpen, onClose, id = null, givenStatus, setGivenStatus }: Props) => {
     const [createTask, { isLoading }] = useCreateTaskMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -54,7 +54,7 @@ const ModalNewTask = ({ isOpen, onClose, id, givenStatus, setGivenStatus }: Prop
         } finally {
             onClose();
             setTitle("");
-            setGivenStatus("");
+            // setGivenStatus("");
             setDescription("");
             setTags("");
             setStatus(undefined);
@@ -64,6 +64,9 @@ const ModalNewTask = ({ isOpen, onClose, id, givenStatus, setGivenStatus }: Prop
             setAuthorUserId("");
             setAssignedUserId("");
             setProjectId("");
+            if (setGivenStatus) {
+                setGivenStatus("");
+            }
 
         }
 
@@ -179,7 +182,7 @@ const ModalNewTask = ({ isOpen, onClose, id, givenStatus, setGivenStatus }: Prop
                     <input
                         type="text"
                         className={inputStyles}
-                        placeholder="ProjectId"
+                        placeholder="Project Id"
                         value={projectId}
                         onChange={(e) => setProjectId(e.target.value)}
                     />

@@ -2,7 +2,7 @@
 
 import {
     useGetProjectsQuery,
-    useGetTasksQuery,
+    useGetUserTasksQuery,
 } from "@/state/api";
 import React from "react";
 import { useAppSelector } from "../redux";
@@ -23,22 +23,60 @@ import {
 } from "recharts";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utlis";
 import { Priority, Project, Task } from "@/types";
+import { format } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 
 const taskColumns: GridColDef[] = [
     { field: "title", headerName: "Title", width: 200 },
+    { field: "projectId", headerName: "project Id", width: 200 },
     { field: "status", headerName: "Status", width: 150 },
     { field: "priority", headerName: "Priority", width: 150 },
-    { field: "dueDate", headerName: "Due Date", width: 150 },
+    {
+        field: "author", headerName: "Project Manager", width: 250,
+        renderCell: (params) => (
+            <div className="flex h-full w-full items-center justify-start  flex gap-1">
+                <div className="h-9 w-9">
+                    <Image
+                        src={`/${params.value.profilePictureUrl}`}
+                        alt={params.value.username}
+                        width={100}
+                        height={100}
+                        className="h-full rounded-full object-cover"
+                    />
+                </div>
+                <span>{params.value.username}</span>
+            </div>
+        ),
+    },
+    {
+        field: "startDate", headerName: "Start Date", width: 150,
+        renderCell: (params) => (
+            <p>
+                {format(new Date(params.value), "P")}
+            </p>
+        )
+    },
+    {
+        field: "dueDate", headerName: "Due Date", width: 150,
+        renderCell: (params) => (
+            <p>
+                {format(new Date(params.value), "P")}
+            </p>
+        )
+    },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const HomePage = () => {
-    const {
-        data: tasks,
+
+
+    const userId = 1;
+    const { data: tasks,
         isLoading: tasksLoading,
-        isError: tasksError,
-    } = useGetTasksQuery({ projectId: parseInt("17") });
+        isError: tasksError, } = useGetUserTasksQuery(userId, { skip: userId === null });
+
     const { data: projects, isLoading: isProjectsLoading } = useGetProjectsQuery();
 
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
@@ -137,14 +175,16 @@ const HomePage = () => {
                     </ResponsiveContainer>
                 </div>
                 <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2">
-                    <h3 className="mb-4 text-lg font-semibold dark:text-white">
-                        Your Tasks
-                    </h3>
+                    <Link href={`/projects/17`}>
+                        <h3 className="mb-4 text-lg hover:text-blue-600 dark:hover:text-blue-600 font-semibold dark:text-white hover:underline cursor-pointer ">
+                            Your Created/Assigned Tasks
+                        </h3>
+                    </Link>
                     <div style={{ height: 400, width: "100%" }}>
                         <DataGrid
                             rows={tasks}
                             columns={taskColumns}
-                            checkboxSelection
+                            // checkboxSelection
                             loading={tasksLoading}
                             getRowClassName={() => "data-grid-row"}
                             getCellClassName={() => "data-grid-cell"}
