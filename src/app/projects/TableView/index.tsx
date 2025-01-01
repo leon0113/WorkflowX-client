@@ -4,7 +4,6 @@ import { useGetTasksQuery } from '@/state/api';
 import React from 'react'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import clsx from 'clsx';
-import { Task } from '@/types';
 import { format } from 'date-fns';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utlis';
 

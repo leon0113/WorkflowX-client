@@ -12,11 +12,8 @@ export interface User {
 export interface Team {
     id: number;
     teamName: string;
-    productOwnerUserId?: number; // Optional field for the product owner's user ID
-    projectManagerUserId?: number; // Optional field for the project manager's user ID
-
-    projectTeams?: ProjectTeam[]; // Relationship for associated project teams
-    user?: User[]; // Relationship for users in the team
+    productOwnerUserId?: number;
+    projectManagerUserId?: number;
 }
 
 export interface TaskAssignment {

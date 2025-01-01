@@ -10,7 +10,7 @@ import {
     GridToolbarFilterButton,
 } from "@mui/x-data-grid";
 import Image from "next/image";
-import { useGetUsersQuery } from "@/state/api";
+import { useGetTeamsQuery } from "@/state/api";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utlis";
 
 const CustomToolbar = () => (
@@ -21,44 +21,29 @@ const CustomToolbar = () => (
 );
 
 const columns: GridColDef[] = [
-    { field: "userId", headerName: "ID", width: 100 },
-    {
-        field: "profilePictureUrl",
-        headerName: "Profile Picture",
-        width: 150,
-        renderCell: (params) => (
-            <div className="flex h-full w-full items-center justify-start">
-                <div className="h-9 w-9">
-                    <Image
-                        src={`/${params.value}`}
-                        alt={params.row.username}
-                        width={100}
-                        height={50}
-                        className="h-full rounded-full object-cover"
-                    />
-                </div>
-            </div>
-        ),
-    },
-    { field: "username", headerName: "Name", width: 150 },
-    { field: "teamId", headerName: "Team ID", width: 150 },
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "teamName", headerName: "Team Name", width: 150 },
+    { field: "productOwnerUserId", headerName: "Product Owner Id", width: 150 },
+    { field: "productOwnerUserName", headerName: "Product Owner Name", width: 150 },
+    { field: "projectManagerUserId", headerName: "Project Manager Id", width: 150 },
+    { field: "projectManagerUserName", headerName: "Project Manager Name", width: 150 },
 ];
 
-const Users = () => {
-    const { data: users, isLoading, isError } = useGetUsersQuery();
+const Teams = () => {
+    const { data: teams, isLoading, isError } = useGetTeamsQuery();
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
     if (isLoading) return <div>Loading...</div>;
-    if (isError || !users) return <div>Error fetching users</div>;
+    if (isError || !teams) return <div>Error fetching teams</div>;
 
     return (
         <div className="flex w-full flex-col p-8">
-            <Header name="Users" />
+            <Header name="Teams" />
             <div style={{ height: 650, width: "100%" }}>
                 <DataGrid
-                    rows={users || []}
+                    rows={teams || []}
                     columns={columns}
-                    getRowId={(row) => row.userId}
+                    getRowId={(row) => row.id}
                     pagination
                     slots={{
                         toolbar: CustomToolbar,
@@ -71,4 +56,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default Teams;
